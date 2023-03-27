@@ -1,10 +1,10 @@
 @extends('teacher.master')
 
 @section('body')
-    <h4 class="card-title text-center text-uppercase p-4">All Teacher Info</h4>
+    <h4 class="card-title text-center text-uppercase">All Teacher Info</h4>
     <h1 class="text-center text-success">{{ session('message') }}</h1>
     <div class="row">
-        <div class="col-md-5 mx-auto">
+        <div class="col-md-5 p-4 mx-auto">
             <form action="{{ route('training.search') }}" method="post">
                 <div class="input-group">
                     @csrf

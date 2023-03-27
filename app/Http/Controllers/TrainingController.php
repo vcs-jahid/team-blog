@@ -34,6 +34,11 @@ class TrainingController extends Controller
         return view('teacher.training.manage', ['trainings' => $this->trainings]);
     }
 
+    public function error()
+    {
+        abort(404);
+    }
+
     public function edit($id)
     {
         $this->categories = Category::all();
