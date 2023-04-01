@@ -460,7 +460,7 @@
                             <span>Training Module</span>
                         </a>
                         <ul class="sub-menu" aria-expanded="false">
-                            <li><a href="ecommerce-products.html">Manage Training</a></li>
+                            <li><a href="{{ route('admin.training.manage') }}">Manage Training</a></li>
                         </ul>
                     </li>
 

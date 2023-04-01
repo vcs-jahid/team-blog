@@ -7,6 +7,7 @@ use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\TeacherAuthController;
 use App\Http\Controllers\TrainingController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\AdminTrainingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +37,7 @@ Route::middleware(['teacher.auth'])->group(function () {
     Route::get('/training/manage', [TrainingController::class, 'manage'])->name('training.manage');
     Route::get('/training/search', [TrainingController::class, 'error'])->name('training.search');
     Route::post('/training/search', [TrainingController::class, 'search'])->name('training.search');
+    Route::get('/training/detail/{id}', [TrainingController::class, 'detail'])->name('training.detail');
     Route::get('/training/edit/{id}', [TrainingController::class, 'edit'])->name('training.edit');
     Route::post('/training/update/{id}', [TrainingController::class, 'update'])->name('training.update');
     Route::post('/training/delete/{id}', [TrainingController::class, 'delete'])->name('training.delete');
@@ -55,5 +57,8 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::get('/teacher/category/edit/{id}', [CategoryController::class, 'edit'])->name('category.edit');
     Route::post('/teacher/category/update/{id}', [CategoryController::class, 'update'])->name('category.update');
     Route::post('/teacher/category/delete/{id}', [CategoryController::class, 'delete'])->name('category.delete');
+    Route::get('/admin/training/manage', [AdminTrainingController::class, 'index'])->name('admin.training.manage');
+    Route::get('/admin/training/detail/{id}', [AdminTrainingController::class, 'show'])->name('admin.training.detail');
+    Route::get('/admin/training/update/status/{id}', [AdminTrainingController::class, 'status'])->name('admin.training.update.status');
 });
 

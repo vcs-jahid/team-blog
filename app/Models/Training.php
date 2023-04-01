@@ -10,7 +10,7 @@ class Training extends Model
 {
     use HasFactory;
 
-    private static $training, $image, $imageExtension, $imageName, $imageDirectory, $imageUrl;
+    private static $training, $image, $imageExtension, $imageName, $imageDirectory, $imageUrl, $message;
 
     private static function getImage($request)
     {
@@ -68,5 +68,32 @@ class Training extends Model
             unlink(self::$training->image);
         }
         self::$training->delete();
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function teacher()
+    {
+        return $this->belongsTo(Teacher::class);
+    }
+
+    public static function updateTrainingStatus($id)
+    {
+        self::$training = Training::find($id);
+        if(self::$training->status == 1)
+        {
+            self::$training->status = 0;
+            self::$message = "Training status unpublished successfully updated.";
+        }
+        else
+        {
+            self::$training->status = 1;
+            self::$message = "Training status published successfully updated.";
+        }
+        self::$training->save();
+        return self::$message;
     }
 }

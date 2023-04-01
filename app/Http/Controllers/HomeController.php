@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Training;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+    private $trainings;
     public function index()
     {
-        return view('website.home.index');
+        $this->trainings = Training::where('status', 1)->get();
+        return view('website.home.index', ['trainings' => $this->trainings]);
     }
     public function about()
     {

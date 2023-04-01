@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Training;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class TrainingController extends Controller
 {
@@ -24,7 +25,7 @@ class TrainingController extends Controller
 
     public function manage()
     {
-        $this->trainings = Training::all();
+        $this->trainings = Training::where('teacher_id', Session::get('teacher_id'))->get();
         return view('teacher.training.manage', ['trainings' => $this->trainings]);
     }
 
@@ -37,6 +38,12 @@ class TrainingController extends Controller
     public function error()
     {
         abort(404);
+    }
+
+    public function detail($id)
+    {
+        $this->training = Training::find($id);
+        return view('teacher.training.detail', ['training' => $this->training]);
     }
 
     public function edit($id)
